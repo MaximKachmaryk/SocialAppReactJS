@@ -26,6 +26,7 @@ const Dialogs = (props) => {
     /* setValue(event.target.value); */
     props.store.dispatch(updateMessageBodyCreator(body));
   };
+  
   let dialogItems = state.dialogStore.map((item) => (
     <DialogItem key={item.id} id={item.id} name={item.name} />
   ));
