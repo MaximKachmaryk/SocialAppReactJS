@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dalogs";
 import Friends from "./components/SideBar/SideBar";
+/* import store from "./components/redux/state"; */
 
 function App(props) {
   return (
@@ -18,14 +19,23 @@ function App(props) {
             path="/dialogs"
             element={
               <Dialogs
-                messages={props.state.messagesPage.messages}
-                dialogStore={props.state.profilePage.dialogStore}
+                store={props.store}
+                dialogsReducer={props.store.getState().dialogsReducer} 
+              /*   messages={props.state.messagesPage.messages}
+                dialogStore={props.state.profilePage.dialogStore} */
               />
             }
           />
           <Route
             path="/profile"
-            element={<Profile postNewData={props.state.profilePage.postNewData} postData={props.state.profilePage.postData} addPost={props.addPost} updateNewPost={props.updateNewPost} />}
+            element={
+              <Profile
+                postNewData={props.state.profilePage.postNewData}
+                postData={props.state.profilePage.postData}
+                dispatch={props.dispatch}
+                /* updateNewPost={props.updateNewPost} */
+              />
+            }
           />
         </Routes>
       </div>

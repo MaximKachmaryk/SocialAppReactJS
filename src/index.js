@@ -1,27 +1,29 @@
 import "./index.css";
-
-/* import reportWebVitals from "./reportWebVitals"; */
-
-/* import { renderEntireTree } from "./render"; */
-import state, { subscribe } from "./components/redux/state";
+import store from "./components/redux/redux-store";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { addPost, updateNewPost } from "./components/redux/state";
-/* import state from "./components/redux/state"; */
 
-let renderEntireTree = () => {
+import { Provider } from "react-redux";
+const renderEntireTree = () => {
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
     <React.StrictMode>
-      <App state={state} addPost={addPost} updateNewPost={updateNewPost} />
+      <Provider store={store}>
+        <App
+          state={store.getState()}
+          dispatch={store.dispatch.bind(store)}
+          store={store}
+          /*   updateNewPost={store.updateNewPost.bind(store)} */
+        />
+      </Provider>
     </React.StrictMode>
   );
 };
-reportWebVitals();
 
-renderEntireTree(state);
-reportWebVitals();
-subscribe(renderEntireTree);
+renderEntireTree(store.getState());
+store.subscribe(() => {
+  let state = store.getState();
+  renderEntireTree(state);
+});
+

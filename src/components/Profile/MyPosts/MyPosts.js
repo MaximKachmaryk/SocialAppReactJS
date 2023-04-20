@@ -1,22 +1,26 @@
 import React, { useRef } from "react";
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import { addPostActionCreator, updateNewPostActionCreator} from "../../redux/profileReducer";
 
-function MyPosts({ postData, addPost, postNewData, updateNewPost }) {
+
+function MyPosts(props) {
+  const { postData, postNewData } = props;
   const newPostEl = useRef(null);
 
   const addNewPost = (event) => {
-    event.preventDefault();
-    const newtext = newPostEl.current.value.trim();
+   /*  event.preventDefault(); */
+    const newtext = newPostEl.current.value;
     if (newtext) {
-      addPost(newtext);
-      newPostEl.current.value = "";
+      props.dispatch(addPostActionCreator());
+    /*   newPostEl.current.value = ""; */
     }
   };
 
   const onChangePost = (event) => {
-    const text = event.target.value;
-    updateNewPost(text);
+    let text = event.target.value;
+    let action =updateNewPostActionCreator(text);
+    props.dispatch(action);
   };
 
   const postsElements = postData.map((el) => (
