@@ -1,26 +1,29 @@
 import React, { useRef } from "react";
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import { addPostActionCreator, updateNewPostActionCreator} from "../../redux/profileReducer";
-
+import {
+  addPostActionCreator,
+  updateNewPostActionCreator,
+} from "../../redux/profileReducer";
+import { connect } from 'react-redux';
 
 function MyPosts(props) {
-  const { postData, postNewData } = props;
+  const { postData, postNewData, dispatch } = props;
   const newPostEl = useRef(null);
 
   const addNewPost = (event) => {
-   /*  event.preventDefault(); */
+    /*  event.preventDefault(); */
     const newtext = newPostEl.current.value;
     if (newtext) {
-      props.dispatch(addPostActionCreator());
-    /*   newPostEl.current.value = ""; */
+      dispatch(addPostActionCreator());
+      /*   newPostEl.current.value = ""; */
     }
   };
 
   const onChangePost = (event) => {
     let text = event.target.value;
-    let action =updateNewPostActionCreator(text);
-    props.dispatch(action);
+    let action = updateNewPostActionCreator(text);
+    dispatch(action);
   };
 
   const postsElements = postData.map((el) => (
@@ -48,5 +51,14 @@ function MyPosts(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    postData: state.profilePage.postData,
+    postNewData: state.profilePage.postNewData,
+  };
+};
+
+const MyPostsContainer = connect(mapStateToProps)(MyPosts);
 
 export default MyPosts;

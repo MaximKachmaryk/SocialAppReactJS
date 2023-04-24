@@ -4,10 +4,9 @@ import {
   updateMessageBodyCreator,
 } from "../redux/dialogsReducer";
 
-import DialogItem from "./DialogItem/DalogItem";
+import DialogItem from "./DialogItem/DialogItem";
 import styles from "./Dialogs.module.css";
 import Message from "./Message/MessageItem";
-
 
 const Dialogs = (props) => {
 
