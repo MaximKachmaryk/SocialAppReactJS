@@ -14,7 +14,6 @@ const renderEntireTree = () => {
           state={store.getState()}
           dispatch={store.dispatch.bind(store)}
           store={store}
-          /*   updateNewPost={store.updateNewPost.bind(store)} */
         />
       </Provider>
     </React.StrictMode>
@@ -26,4 +25,3 @@ store.subscribe(() => {
   let state = store.getState();
   renderEntireTree(state);
 });
-

@@ -2,7 +2,6 @@ const UPDATE_NEW_MESSAGE_BODY = "UPDATE_NEW_MESSAGE_BODY";
 const SEND_MESSAGE = "SEND_MESSAGE";
 
 let initialState = {
-  
   messages: [
     { id: 1, text: "Hi there! 😃" },
     { id: 2, text: "How are you doing? 🙂" },
